@@ -1,12 +1,14 @@
-@extends ('components.welcome')
+@extends ('components.layout')
 
 @section('content')
 
-    @if($posts->count())
+    <x-postLayout :post="$posts[0]"/>
+
+    @if($posts->count() > 1)
         <div class="lg:grid lg:grid-cols-3">
 
-            @foreach($posts as $post)
-                <x-postLayout :post="$post"/>
+            @foreach($posts->skip(1) as $post)
+                    <x-postLayout :post="$post"/>
             @endforeach
 
         </div>

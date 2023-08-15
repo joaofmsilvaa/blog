@@ -21,10 +21,10 @@
 
     </head>
     <body>
-        <div class="text-center mx-w-3xl mt-8">
-            <h1 class="text-3xl text-blue-500">Welcome to my blog</h1>
-            <h2 class="mt-4 text-semibold text-lg">Post list:</h2>
 
+        <x-navbar/>
+
+        <div class="text-center mx-w-3xl mt-10">
             <div class="p-5">
                 @yield('content')
             </div>
