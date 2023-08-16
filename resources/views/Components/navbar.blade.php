@@ -3,6 +3,7 @@
         <a href="/" class="flex items-center">
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Dev.<span class="text-blue-500">hub</span></span>
         </a>
+<<<<<<< Updated upstream
         <div class="flex md:order-2">
             <a href="/register"
                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3  md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -13,5 +14,27 @@
                 Sign up
             </a>
         </div>
+=======
+
+        @guest
+            <div class="flex md:order-2">
+                <a href="/register"
+                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3  md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Sign in
+                </a>
+                <a href="/login"
+                   class="text-blue-700 bg-gray-100 border-2 border-blue-300 transition-colors duration-300 hover:bg-blue-300 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 md:mr-0 ">
+                    Sign up
+                </a>
+            </div>
+        @endguest
+
+        @auth
+            <div class="flex md:order-2">
+                <p>Welcome back <span class="text-semibold text-blue-500 ml-1">{{auth()->user()->username}}</span></p>
+            </div>
+        @endauth
+
+>>>>>>> Stashed changes
     </div>
 </nav>
