@@ -10,8 +10,6 @@ class SessionController extends Controller
     public function create(){
         return view('sessions.login');
     }
-<<<<<<< Updated upstream
-=======
 
     public function store(){
 
@@ -31,5 +29,5 @@ class SessionController extends Controller
             ->withErrors(['email' => 'Your provided credentials could not be verified']);
 
     }
->>>>>>> Stashed changes
+
 }
