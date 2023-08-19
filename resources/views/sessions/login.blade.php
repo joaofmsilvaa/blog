@@ -3,6 +3,7 @@
 @section('content')
 
     <section class="px-6 py-8 mt-10">
+        <h1 class="mb-5 text-3xl text-bold text-blue-600">Welcome back</h1>
         <main class="max-w-xl mx-auto mt-10 bg-gray-100 border-gray-200 p-6 rounded-xl">
             <form method="POST" action="/sessions">
                 @csrf
