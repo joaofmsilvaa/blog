@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function create(){
-        $posts = DB::table('Posts')->where('user_id', '=', auth()->user()->id)
+    public function create(User $user){
+        $posts = DB::table('Posts')->where('user_id', '=', $user->id)
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(15)->withQueryString();;
 
-        return view('user.profile', compact('posts'));
+        return view('user.profile', compact('posts','user'));
     }
 }

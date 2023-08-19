@@ -11,6 +11,9 @@
         </div>
     </div>
 
+    <div class="p-8">
+        {{$posts->links()}}
+    </div>
 @else
     <p class="mt-4">No posts yet</p>
 @endif
