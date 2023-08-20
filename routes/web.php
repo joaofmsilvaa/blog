@@ -31,3 +31,4 @@ Route::post('sessions', [SessionController::class, 'store'])->middleware('guest'
 Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth');
 
 Route::get('profile/{user}', [UserController::class, 'create']);
+Route::get('/profile/{user}/edit', [UserController::class, 'edit'])->middleware('editProfile');
