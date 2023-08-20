@@ -14,6 +14,10 @@ class UserController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(15)->withQueryString();;
 
-        return view('user.profile', compact('posts','user'));
+
+        $amountOfPosts = DB::table('Posts')->where('user_id', '=', $user->id)->count();
+
+
+        return view('user.profile', compact('posts','user', 'amountOfPosts'));
     }
 }

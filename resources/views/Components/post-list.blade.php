@@ -2,8 +2,8 @@
 
 
 @if($posts->count() > 0)
-    <div class="lg:grid-cols-3 sm:grid-cols-1">
-        <div class="p-8">
+    <div class="lg:grid-cols-3 sm:grid-cols-1 flex justify-center">
+        <div>
             <div class="lg:grid lg:grid-cols-3">
                 @foreach($posts as $post)
                     <x-postLayout :post="$post"/>
@@ -16,5 +16,5 @@
         {{$posts->links()}}
     </div>
 @else
-    <p class="mt-4">No posts yet</p>
+    <p class="my-4 text-xl">No posts yet</p>
 @endif
