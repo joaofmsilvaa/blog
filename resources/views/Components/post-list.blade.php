@@ -1,6 +1,7 @@
 @props(['posts'])
 
-@if($posts->count() > 1)
+
+@if($posts->count() > 0)
     <div class="lg:grid-cols-3 sm:grid-cols-1">
         <div class="p-8">
             <div class="lg:grid lg:grid-cols-3">

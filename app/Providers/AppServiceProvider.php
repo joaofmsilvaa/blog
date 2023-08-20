@@ -24,5 +24,10 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('admin', function (User $user){
             return $user->username == 'joao';
         });
+
+        Gate::define('editProfile', function (User $user){
+            return request()->route('user')->id == auth()->user()->id;
+        });
+
     }
 }

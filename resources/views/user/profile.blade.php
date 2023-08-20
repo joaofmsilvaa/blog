@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="p-8">
-        <div class="p-8 flex bg-gray-100 rounded">
+        <div class="p-8 flex bg-gray-100 rounded-lg">
             <div class="sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-32 md:w-32 w-24 h-24 rounded-full overflow-hidden">
                 <img src="/images/profilePicture.jpg"
                      alt="profile picture"
@@ -12,7 +12,12 @@
             </div>
             <div class="ml-6">
                 <div class="flex flex-col items-start">
-                    <h1 class="text-xl font-semibold">{{$user->name}}</h1>
+                    <h1 class="text-xl font-semibold">{{$user->name}}
+
+                        @can('editProfile', $user)
+                            <a href="#" class="bg-blue-600 rounded"> Edit profile </a>
+                        @endcan
+                    </h1>
                     <p class="text-md text-gray-500 mt-1">
                         <spam>{{$user->username}}</spam>
                     </p>

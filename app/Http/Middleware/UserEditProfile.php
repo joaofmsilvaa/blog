@@ -15,6 +15,10 @@ class UserEditProfile
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if(auth()->user()?->cannot('editProfile')){
+            abort(403);
+        }
+
         return $next($request);
     }
 }
