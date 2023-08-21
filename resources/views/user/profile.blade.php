@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <div class="flex justify-center">
-        <div class="p-8 w-3/4 justify-center">
+    <div class="flex justify-center mt-5 ">
+        <div class="p-8 lg:w-3/4 md:16/16 justify-center">
             <div class="p-8 md:items-center justify-center lg:justify-start lg:items-start bg-gray-100 rounded-xl">
                 <div class="flex flex-col">
                     <div class="flex ">
@@ -14,12 +14,6 @@
                                      alt="profile picture"
                                      class="object-cover border-b-2 shadow-2xl"
                                 >
-                            </div>
-                            <div class="ml-6">
-                                <div>
-                                    <p class="font-semibold text-lg">Posts</p>
-                                    <p>{{$amountOfPosts}}</p>
-                                </div>
                             </div>
                         </div>
 
@@ -39,20 +33,18 @@
                                 <p class="mt-3">{{$user->description}}</p>
 
                             @else
-                                <p class="mt-3">This user haven't set their description yet :/</p>
+                                <p class="mt-3">This user haven't set their description yet</p>
                             @endif
 
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="mt-3 rounded-xl border-b-2 p-3 bg-blue-50">
-                <x-post-list :posts="$posts"/>
-
-            </div>
-
         </div>
+    </div>
+
+    <div class="grid grid-cols">
+        <x-post-list :posts="$posts"/>
     </div>
 
 @endsection

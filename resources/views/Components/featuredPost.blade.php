@@ -1,7 +1,7 @@
 @props(['post'])
 
-<div class="3/4 mt-5 p-2">
-    <img src="/images/illustration1.png" alt="flying letters" class="w-full" />
+<div class="2xl:w-7/12 lg:w-8/12 md:w-16/16 w-full mt-5">
+    <img src="/images/illustration1.png" alt="fingerprint recognition" class="w-full" />
     <div class="mt-4">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
@@ -13,10 +13,9 @@
                 <p class="text-base leading-none text-gray-500 dark:text-gray-200 ml-2">{{$post->author->name}}</p>
             </div>
         </div>
-        <h1 class="text-2xl font-semibold leading-6 mt-4 text-gray-800">{!! $post->title !!}</h1>
+        <h1 class="lg:text-3xl text-2xl font-semibold mt-4 text-gray-800">{{$post->title}}</h1>
         <div class="text-base text-justify leading-6 text-gray-600 dark:text-gray-200 mt-2">
             {!! $post->excerpt !!}
         </div>
-
     </div>
 </div>
