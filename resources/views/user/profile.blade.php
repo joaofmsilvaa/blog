@@ -15,12 +15,6 @@
                                      class="object-cover border-b-2 shadow-2xl"
                                 >
                             </div>
-                            <div class="ml-6">
-                                <div>
-                                    <p class="font-semibold text-lg">Posts</p>
-                                    <p>{{$amountOfPosts}}</p>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
