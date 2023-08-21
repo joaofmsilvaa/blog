@@ -39,7 +39,7 @@
                                 <p class="mt-3">{{$user->description}}</p>
 
                             @else
-                                <p class="mt-3">This user haven't set their description yet :/</p>
+                                <p class="mt-3">This user haven't set their description yet</p>
                             @endif
 
                         </div>
