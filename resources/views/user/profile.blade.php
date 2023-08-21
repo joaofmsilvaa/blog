@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <div class="flex justify-center">
-        <div class="p-8 w-3/4 justify-center">
+    <div class="flex justify-center mt-5 ">
+        <div class="p-8 lg:w-3/4 md:16/16 justify-center">
             <div class="p-8 md:items-center justify-center lg:justify-start lg:items-start bg-gray-100 rounded-xl">
                 <div class="flex flex-col">
                     <div class="flex ">
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="grid grid-cols">
         <x-post-list :posts="$posts"/>
     </div>
 

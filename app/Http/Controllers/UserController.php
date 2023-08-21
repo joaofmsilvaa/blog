@@ -12,15 +12,11 @@ class UserController extends Controller
 {
     public function create(User $user)
     {
-        $posts = DB::table('Posts')->where('user_id', '=', $user->id)
+        $posts = Post::latest()->where('user_id', '=', $user->id)
             ->orderBy('id', 'desc')
-            ->paginate(15)->withQueryString();;
+            ->paginate(15);
 
-
-        $amountOfPosts = DB::table('Posts')->where('user_id', '=', $user->id)->count();
-
-
-        return view('user.profile', compact('posts', 'user', 'amountOfPosts'));
+        return view('user.profile', compact('posts', 'user'));
     }
 
     public function edit(User $user)
