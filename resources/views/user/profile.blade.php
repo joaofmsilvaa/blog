@@ -40,13 +40,11 @@
                     </div>
                 </div>
             </div>
-
-            <div class="mt-3 rounded-xl border-b-2 p-3 bg-blue-50">
-                <x-post-list :posts="$posts"/>
-
-            </div>
-
         </div>
+    </div>
+
+    <div>
+        <x-post-list :posts="$posts"/>
     </div>
 
 @endsection

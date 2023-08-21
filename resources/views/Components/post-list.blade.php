@@ -5,7 +5,7 @@
     <div class="lg:grid-cols-3 sm:grid-cols-1 flex justify-center">
         <div>
             <div class="lg:grid lg:grid-cols-3">
-                @foreach($posts as $post)
+                @foreach($posts->skip(1) as $post)
                     <x-postLayout :post="$post"/>
                 @endforeach
             </div>
