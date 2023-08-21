@@ -20,4 +20,9 @@ class UserController extends Controller
 
         return view('user.profile', compact('posts','user', 'amountOfPosts'));
     }
+
+    public function edit(User $user){
+        return view('user.edit', ['user' => $user]);
+    }
+
 }
