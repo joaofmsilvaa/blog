@@ -10,7 +10,7 @@
                         <div class="flex items-center">
                             <div
                                 class="sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-32 lg:h-32 w-24 h-24 rounded-full overflow-hidden object-cover">
-                                <img src="/images/profilePicture.jpg"
+                                <img src="/storage/{{$user->profilePicture}}"
                                      alt="profile picture"
                                      class="object-cover border-b-2 shadow-2xl"
                                 >
@@ -28,7 +28,7 @@
                         <div class="flex flex-col items-start">
                             <h1 class="text-xl font-semibold">{{$user->name}}
                                 @can('editProfile', $user)
-                                    <a href="#" class="bg-blue-600 rounded p-1 text-white text-sm ml-3"> Edit
+                                    <a href="/profile/{{$user->id}}/edit" class="bg-blue-600 rounded p-1 text-white text-sm ml-3"> Edit
                                         profile </a>
                                 @endcan
                             </h1>

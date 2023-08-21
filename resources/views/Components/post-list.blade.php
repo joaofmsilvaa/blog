@@ -16,5 +16,5 @@
         {{$posts->links()}}
     </div>
 @else
-    <p class="my-4 text-xl">No posts yet</p>
+    <p class="my-4 text-xl">No posts yet :(</p>
 @endif

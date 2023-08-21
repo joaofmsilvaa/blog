@@ -7,20 +7,28 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-    public function create(){
+    public function create()
+    {
         return view('register.create');
     }
 
-    public function store(){
+    public function store()
+    {
 
         $attributes = request()->validate([
-            'name' => ['required','max:255'],
-            'username' => ['required','max:255','min:3','unique:users,username'],
-            'email' => ['required','email','max:255','unique:users,email'],
+            'name' => ['required', 'max:255'],
+            'username' => ['required', 'max:255', 'min:3', 'unique:users,username'],
+            'profilePicture' => ['image', 'required'],
+            'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'min:8', 'max:255']
         ]);
 
         $attributes['password'] = bcrypt($attributes['password']);
+
+        if(isset($attributes['profilePicture'])){
+            $storingPath = request()->file('profilePicture')->store('public/profilePictures');
+            $attributes['profilePicture'] = str_replace("public/", "", $storingPath);
+        }
 
         $user = User::create($attributes);
 
