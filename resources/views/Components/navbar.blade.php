@@ -17,10 +17,11 @@
                     @can('admin')
                         <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">Dashboard
                         </x-dropdown-item>
-                        <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New
-                            post
-                        </x-dropdown-item>
                     @endcan
+
+                    <x-dropdown-item href="/posts/create" :active="request()->is('admin/posts/create')">New
+                        post
+                    </x-dropdown-item>
 
                     <x-dropdown-item href="/profile/{{auth()->user()->id}}" :active="request()->is('profile')">Profile
                     </x-dropdown-item>

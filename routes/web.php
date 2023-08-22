@@ -33,3 +33,6 @@ Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth')
 Route::get('profile/{user}', [UserController::class, 'create']);
 Route::get('/profile/{user}/edit', [UserController::class, 'edit'])->middleware('editProfile');
 Route::patch('/profile/{user}/update', [UserController::class, 'update'])->middleware('editProfile');
+
+Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth');
+Route::post('/posts/publish', [PostController::class, 'store'])->middleware('auth');
