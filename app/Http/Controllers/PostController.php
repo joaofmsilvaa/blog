@@ -39,6 +39,12 @@ class PostController extends Controller
         return redirect('/');
     }
 
+    public function show($slug){
+
+        $post = Post::where('slug', $slug)->first();
+        return view('posts.show', ['post' => $post]);
+    }
+
 }
 
 

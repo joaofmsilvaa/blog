@@ -20,19 +20,18 @@
                         </div>
                     </div>
 
-                        <div class="2xl:w-7/12 lg:w-8/12 md:w-16/16 w-full mt-5 px-2 rounded-xl"
-                             id="div_preview1"
-                             style="display: none">
-                            <img src="#"
-                                 id="image_preview1"
-                                 alt="Featured post preview"
-                                 class="w-full rounded-xl h-96 object-cover"
-                            />
-                            <figcaption
-                                class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">
-                                Featured post preview
-                            </figcaption>
-                        </div>
+                    <div class="flex-1 lg:mr-8">
+                        <img src="#"
+                             id="image_preview1"
+                             alt="Featured post preview"
+                             class="rounded-xl">
+
+                        <figcaption
+                            class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">
+                            Featured post preview
+                        </figcaption>
+                    </div>
+
                 </div>
 
                 <label for="excerpt"
@@ -83,7 +82,6 @@
         const imagePreview1 = document.getElementById('image_preview1');
 
 
-
         profileImageInput.addEventListener('change', function (event) {
             const file = event.target.files[0];
 
@@ -93,7 +91,6 @@
                 reader.onload = function (e) {
                     imagePreview1.src = e.target.result;
                     divPreview1.style.display = 'block';
-
 
 
                 }
