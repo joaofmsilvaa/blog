@@ -9,10 +9,10 @@ use Illuminate\Validation\Rule;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::latest()
+        $post = Post::latest()
             ->with(['category', 'author'])->paginate(15)->withQueryString();
 
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('post'));
     }
 
     public function create(){
@@ -25,7 +25,7 @@ class PostController extends Controller
             'title'=>'required',
             'thumbnail' => 'required|image',
             'slug' => ['required', Rule::unique('posts', 'slug')],
-            'excerpt'=>'required' , 'min:10', 'max:80',
+            'excerpt'=>['required' , 'min:10', 'max:160'],
             'body'=>'required',
             'category_id' => ['required', Rule::exists('categories', 'id')],
         ]);
@@ -37,6 +37,12 @@ class PostController extends Controller
         Post::create($attributes);
 
         return redirect('/');
+    }
+
+    public function show($slug){
+
+        $post = Post::where('slug', $slug)->first();
+        return view('posts.show', ['post' => $post]);
     }
 
 }

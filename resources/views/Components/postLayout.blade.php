@@ -1,22 +1,62 @@
 @props(['post'])
 
-<div class="3/4 mt-5 bg-100 p-2 mx-2 rounded-xl">
-    <img src="/storage/{{$post->thumbnail}}" alt="flying letters" class="w-full rounded-xl h-96 object-cover" />
-    <div class="mt-4">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center">
-                <p class="text-base leading-4 text-gray-500 dark:text-gray-200"><time>{{$post->created_at->diffForHumans()}}</time></p>
-                <p class="text-base leading-none text-gray-500 dark:text-gray-200 ml-12">{{$post->category->name}}</p>
-            </div>
-            <div class="flex items-center">
-                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/blog-4-svg1.svg" alt="line" />
-                <p class="text-base leading-none text-gray-500 dark:text-gray-200 ml-2">{{$post->author->name}}</p>
-            </div>
-        </div>
-        <h1 class="text-2xl font-semibold leading-6 mt-4 text-gray-800">{!! $post->title !!}</h1>
-        <div class="text-base text-justify leading-6 text-gray-600 dark:text-gray-200 mt-2">
-            {!! $post->excerpt !!}
+<article
+    {{ $attributes->merge(['class' => 'transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl']) }}>
+    <div class="py-6 px-5 h-full flex flex-col">
+        <div>
+            @if(isset($post->thumbnail))
+                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post thumbnail" class="rounded-xl w-full h-96 object-cover">
+            @else
+                <img src="{{ asset('images/illustration1.png' . $post->thumbnail) }}" alt="Blog Post thumbnail" class="rounded-xl w-full h-96 object-cover">
+            @endif
         </div>
 
+        <div class="mt-6 flex mt-2 flex-col justify-between flex-1">
+            <header>
+                <div class="space-x-2">
+                    <x-category-button :category="$post->category" />
+                </div>
+
+                <div class="mt-4">
+                    <h1 class="text-3xl clamp one-line">
+                        <a href="/posts/{{ $post->slug }}">
+                            {{ $post->title }}
+                        </a>
+                    </h1>
+
+                    <span class="mt-2 block text-gray-400 text-xs">
+                        Published <time>{{ $post->created_at->diffForHumans() }}</time>
+                    </span>
+                </div>
+            </header>
+
+            <div class="text-sm mt-4 space-y-4 whitespace-normal text-justify">
+                {!! $post->excerpt !!}
+            </div>
+
+
+
+            <footer class="flex justify-between items-center mt-8">
+                <div class="flex items-center text-sm">
+                    @if(isset($post->author->profilePicture))
+                        <img src="/storage/{{$post->author->profilePicture}}" alt="Profile picture" class="w-14 rounded-full">
+
+                    @else
+                        <img src="/storage/profilePictures/defaultImage.jpg" alt="Profile picture" class="w-14 rounded-full">
+                    @endif
+                    <div class="ml-3">
+                        <h5 class="font-bold">
+                            <a href="/?author={{ $post->author->username }}">{{ $post->author->name }}</a>
+                        </h5>
+                    </div>
+                </div>
+
+                <div>
+                    <a href="/posts/{{ $post->slug }}"
+                       class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8"
+                    >Read More</a>
+                </div>
+            </footer>
+        </div>
     </div>
-</div>
+</article>
