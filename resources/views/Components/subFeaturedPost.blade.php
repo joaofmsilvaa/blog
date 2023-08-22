@@ -1,7 +1,7 @@
 @props(['post'])
 
 
-<div class="lg:w-auto sm:w-1/2 mt-5">
+<div class="lg:w-auto sm:w-1/2 mt-5 px-2">
     <img src="/images/illustration1.png" alt="flying letters" class="w-full" />
     <div class="mt-4">
         <div class="flex items-center justify-between">
