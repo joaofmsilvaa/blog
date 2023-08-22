@@ -26,7 +26,7 @@ class RegisterController extends Controller
 
         if(isset($attributes['profilePicture'])){
             $storingPath = request()->file('profilePicture')->store('public/profilePictures');
-            $attributes['profilePicture'] = str_replace("public/", "storage/", $storingPath);
+            $attributes['profilePicture'] = str_replace("public/", "", $storingPath);
 
         }
         else{
