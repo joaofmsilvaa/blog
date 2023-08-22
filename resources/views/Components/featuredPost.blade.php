@@ -1,22 +1,51 @@
 @props(['post'])
 
-<div class="2xl:w-7/12 lg:w-8/12 md:w-16/16 w-full mt-5 px-2 rounded-xl">
-    <img src="/storage/{{$post->thumbnail}}" alt="{{$post->title}}'s thumbnail" class="w-full rounded-xl h-96 object-cover" />
-
-    <div class="mt-4">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center">
-                <p class="text-base leading-4 text-gray-500 dark:text-gray-200"><time>{{$post->created_at->diffForHumans()}}</time></p>
-                <p class="text-base leading-none text-gray-500 dark:text-gray-200 ml-12">{{$post->category->name}}</p>
-            </div>
-            <div class="flex items-center">
-                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/blog-4-svg1.svg" alt="line" />
-                <p class="text-base leading-none text-gray-500 dark:text-gray-200 ml-2">{{$post->author->name}}</p>
-            </div>
+<article
+    class="transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl">
+    <div class="py-6 px-5 lg:flex">
+        <div class="flex-1 lg:mr-8">
+            <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post illustration" class="rounded-xl">
         </div>
-        <h1 class="lg:text-3xl text-2xl font-semibold mt-4 text-gray-800">{{$post->title}}</h1>
-        <div class="text-base text-justify leading-6 text-gray-600 dark:text-gray-200 mt-2">
-            {!! $post->excerpt !!}
+
+        <div class="flex-1 flex flex-col justify-between">
+            <header class="mt-8 lg:mt-0">
+                <div class="space-x-2">
+                    <x-category-button :category="$post->category" />
+                </div>
+
+                <div class="mt-4">
+                    <h1 class="text-3xl">
+                        <a href="/posts/{{ $post->slug }}">
+                            {{ $post->title }}
+                        </a>
+                    </h1>
+
+                    <span class="mt-2 block text-gray-400 text-xs">
+                        Published <time>{{ $post->created_at->diffForHumans() }}</time>
+                    </span>
+                </div>
+            </header>
+
+            <div class="text-sm mt-2 space-y-4">
+                {!! $post->excerpt !!}
+            </div>
+
+            <footer class="flex justify-between items-center mt-8">
+                <div class="flex items-center text-sm">
+                    <img src="/images/lary-avatar.svg" alt="Lary avatar">
+                    <div class="ml-3">
+                        <h5 class="font-bold">
+                            <a href="/?author={{ $post->author->username }}">{{ $post->author->name }}</a>
+                        </h5>
+                    </div>
+                </div>
+
+                <div class="hidden lg:block">
+                    <a href="/posts/{{ $post->slug }}"
+                       class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8"
+                    >Read More</a>
+                </div>
+            </footer>
         </div>
     </div>
-</div>
+</article>

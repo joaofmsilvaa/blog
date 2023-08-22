@@ -14,11 +14,10 @@ class RegisterController extends Controller
 
     public function store()
     {
-
         $attributes = request()->validate([
             'name' => ['required', 'max:255'],
             'username' => ['required', 'max:255', 'min:3', 'unique:users,username'],
-            'profilePicture' => ['image', 'required'],
+            'profilePicture' => ['image'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'min:8', 'max:255']
         ]);
@@ -27,7 +26,11 @@ class RegisterController extends Controller
 
         if(isset($attributes['profilePicture'])){
             $storingPath = request()->file('profilePicture')->store('public/profilePictures');
-            $attributes['profilePicture'] = str_replace("public/", "", $storingPath);
+            $attributes['profilePicture'] = str_replace("public/", "storage/", $storingPath);
+
+        }
+        else{
+            $attributes['profilePicture'] = 'profilePictures/defaultImage.jpg';
         }
 
         $user = User::create($attributes);
