@@ -1,7 +1,8 @@
 @props(['post'])
 
-<div class="2xl:w-7/12 lg:w-8/12 md:w-16/16 w-full mt-5">
-    <img src="/images/illustration1.png" alt="fingerprint recognition" class="w-full" />
+<div class="2xl:w-7/12 lg:w-8/12 md:w-16/16 w-full mt-5 px-2 rounded-xl">
+    <img src="/storage/{{$post->thumbnail}}" alt="{{$post->title}}'s thumbnail" class="w-full rounded-xl h-96 object-cover" />
+
     <div class="mt-4">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
