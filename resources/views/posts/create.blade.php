@@ -17,25 +17,24 @@
                         <div class="flex-1">
                             <x-form.formInput name="thumbnail" type="file"/>
                         </div>
-                        <div class="w-1/4 mt-5 p-2">
-                            <img
-                                id="image_preview"
-                                src="#" alt="Thumbnail"
-                                style="display: none"
-                                alt="Thumbnail"
-                                class="w-xl"
-                            >
-                        </div>
+                    </div>
+
+                    <div class="2xl:w-7/12 lg:w-8/12 md:w-16/16 w-full mt-5 px-2 rounded-xl">
+                        <img src="#"
+                             id="image_preview"
+                             alt="posts thumbnail preview"
+                             class="w-full rounded-xl h-96 object-cover"
+                             style="display: none"/>
                     </div>
                 </div>
 
-                <label for="excerpt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Excerpt</label>
+                <label for="excerpt" class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Excerpt</label>
                 <x-form.textarea name="excerpt"/>
 
-                <label for="Body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
+                <label for="Body" class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
                 <x-form.textarea name="body"/>
 
-                <div class="mb-6">
+                <div class="mb-6 mt-2">
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
                            for="category_id">Category</label>
 

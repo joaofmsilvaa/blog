@@ -1,7 +1,7 @@
 @props(['post'])
 
-<div class="3/4 mt-5 p-2">
-    <img src="/images/illustration1.png" alt="flying letters" class="w-full" />
+<div class="3/4 mt-5 bg-100 p-2 mx-2 rounded-xl">
+    <img src="/storage/{{$post->thumbnail}}" alt="flying letters" class="w-full rounded-xl h-96 object-cover" />
     <div class="mt-4">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
