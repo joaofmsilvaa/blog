@@ -25,12 +25,19 @@
 
 <div class="text-center mx-w-3xl mt-10">
     <div class="p-5">
+        <x-header/>
+    </div>
+
+    <div class="p-5">
         @yield('content')
     </div>
 
     @if(session()->has('success'))
         <x-flash/>
     @endif
+
+
+    <x-footer/>
 
 </div>
 </body>
