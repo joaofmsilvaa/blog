@@ -36,13 +36,32 @@ class PostController extends Controller
 
         Post::create($attributes);
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Post created');
     }
 
-    public function show($slug){
+    public function show(Post $post){
 
-        $post = Post::where('slug', $slug)->first();
-        return view('posts.show', ['post' => $post]);
+
+        if (auth()->user()?->id == $post->author->id) {
+            $canDelete = true;
+        } else {
+            $canDelete = false;
+        }
+
+        $post = Post::where('id', $post->id)->first();
+        return view('posts.show', ['post' => $post, 'canDelete' => $canDelete]);
+
+    }
+
+    public function destroy(Post $post){
+
+        if (auth()->user()?->id == $post->author->id) {
+            $post->delete();
+        } else {
+            abort(403);
+        }
+
+        return redirect('/')->with('success', 'Post deleted');
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminsOnly;
+use App\Http\Middleware\DeletePost;
 use App\Http\Middleware\UserEditProfile;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
