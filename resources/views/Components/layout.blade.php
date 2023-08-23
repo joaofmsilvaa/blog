@@ -36,6 +36,9 @@
         <x-flash/>
     @endif
 
+
+    <x-footer/>
+
 </div>
 </body>
 </html>
