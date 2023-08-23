@@ -39,7 +39,7 @@ class RegisterController extends Controller
 
         session()->flash('success', 'Your account has been created');
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Welcome ' . $user->username);
 
     }
 

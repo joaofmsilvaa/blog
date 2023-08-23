@@ -10,9 +10,11 @@
             <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
                 <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
                     @if(isset($post->thumbnail))
-                        <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post thumbnail" class="rounded-xl">
+                        <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post thumbnail"
+                             class="rounded-xl">
                     @else
-                        <img src="{{ asset('images/illustration1.png' . $post->thumbnail) }}" alt="Blog Post thumbnail" class="rounded-xl">
+                        <img src="{{ asset('images/illustration1.png' . $post->thumbnail) }}" alt="Blog Post thumbnail"
+                             class="rounded-xl">
                     @endif
 
                     <p class="mt-4 block text-gray-400 text-xs">
@@ -22,15 +24,30 @@
 
                     <div class="flex items-center lg:justify-center text-sm mt-4">
                         @if(isset($post->author->profilePicture))
-                            <img src="/storage/{{$post->author->profilePicture}}" alt="Profile picture" class="w-14 rounded-full">
+                            <img src="/storage/{{$post->author->profilePicture}}" alt="Profile picture"
+                                 class="w-14 rounded-full">
 
                         @else
-                            <img src="/storage/profilePictures/defaultImage.jpg" alt="Profile picture" class="w-14 rounded-full">
+                            <img src="/storage/profilePictures/defaultImage.jpg" alt="Profile picture"
+                                 class="w-14 rounded-full">
                         @endif
                         <div class="ml-3 text-left">
                             <h5 class="font-bold"><a
                                     href="/?author={{$post->author->username}}"> {{$post->author->name}}</a></h5>
                             <h6><a href="/?author={{$post->author->username}}">{{$post->author->username}}</a></h6>
+
+                            @auth
+                                @if ($canDelete)
+                                    <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-600 transition hover:bg-red-400 rounded text-white p-1 mt-3">Delete
+                                            Post
+                                        </button>
+                                    </form>
+                                @endif
+                            @endauth
+
                         </div>
                     </div>
                 </div>

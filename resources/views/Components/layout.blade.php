@@ -28,6 +28,10 @@
         @yield('content')
     </div>
 
+    @if(session()->has('success'))
+        <x-flash/>
+    @endif
+
 </div>
 </body>
 </html>

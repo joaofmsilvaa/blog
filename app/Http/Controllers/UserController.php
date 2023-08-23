@@ -41,7 +41,7 @@ class UserController extends Controller
 
         $user->update($attributes);
 
-        return redirect('/profile/' . $user->id);
+        return redirect('/profile/' . $user->id)->with('success', 'Profile updated');
 
     }
 
