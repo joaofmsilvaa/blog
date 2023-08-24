@@ -1,5 +1,5 @@
 <div class="w-full p-5 flex flex-col items-center">
-    <img src="/storage/profilePictures/defaultImage.jpg" class="w-48">
+    <img src="/images/logo.png" class="w-48">
     <h1 class="text-3xl self-center font-semibold whitespace-nowrap">Welcome to
         <span class=" dark:text-white">
             Dev.<span class="text-blue-500">hub</span>
