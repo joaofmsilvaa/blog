@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Dev.hub</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -24,9 +24,6 @@
 <x-navbar/>
 
 <div class="text-center mx-w-3xl mt-10">
-    <div class="p-5">
-        <x-header/>
-    </div>
 
     <div class="p-5">
         @yield('content')

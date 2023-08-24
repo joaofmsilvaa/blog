@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -38,3 +39,5 @@ Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth
 Route::post('/posts/publish', [PostController::class, 'store'])->middleware('auth');
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware('admin');

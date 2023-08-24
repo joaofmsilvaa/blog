@@ -15,15 +15,15 @@
                     </x-slot>
 
                     @can('admin')
-                        <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">Dashboard
+                        <x-dropdown-item href="/admin/posts">Dashboard
                         </x-dropdown-item>
                     @endcan
 
-                    <x-dropdown-item href="/posts/create" :active="request()->is('admin/posts/create')">New
+                    <x-dropdown-item href="/posts/create">New
                         post
                     </x-dropdown-item>
 
-                    <x-dropdown-item href="/profile/{{auth()->user()->id}}" :active="request()->is('profile')">Profile
+                    <x-dropdown-item href="/profile/{{auth()->user()->id}}">Profile
                     </x-dropdown-item>
 
                     <x-dropdown-item href="#" x-data="{}"

@@ -20,11 +20,11 @@
                         </div>
                     </div>
 
-                    <div class="flex-1 lg:mr-8">
+                    <div class="flex-1 lg:mr-8" id="div_preview1">
                         <img src="#"
                              id="image_preview1"
-                             alt="Featured post preview"
-                             class="rounded-xl">
+                             class="rounded-xl"
+                             style="display: none">
 
                         <figcaption
                             class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">
