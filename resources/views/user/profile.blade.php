@@ -10,19 +10,14 @@
                         <div class="flex items-center">
                             <div
                                 class="sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-32 lg:h-32 w-24 h-24 rounded-full overflow-hidden object-cover">
-                                @if(isset($user->thumbnail))
-                                    <img src="/storage/{{$user->profilePicture}}"
-                                         alt="profile picture"
-                                         class="object-cover border-b-2 shadow-2xl"
-                                    >
+                                    @if(isset($user->profilePicture))
+                                        <img src="/storage/{{$user->profilePicture}}" alt="profile picture"
+                                             class="object-cover border-b-2 shadow-2xl">
 
-                                @else
-                                    <img src="/storage/profilePictures/defaultImage.jpg"
-                                         alt="profile picture"
-                                         class="object-cover border-b-2 shadow-2xl"
-                                    >
-
-                                @endif
+                                    @else
+                                        <img src="/storage/profilePictures/defaultImage.jpg" alt="profile picture"
+                                             class="object-cover border-b-2 shadow-2xl">
+                                    @endif
 
                             </div>
                         </div>

@@ -20,7 +20,7 @@
                     <th scope="col" class="px-6 py-3">
                         Edit
                     </th>
-                    <th scope="col" class="px-3 py-3 text-center">
+                    <th scope="col" class="px-3 py-3">
                         Delete
                     </th>
                 </tr>
@@ -55,12 +55,12 @@
                             </td>
 
 
-                            <td class="text-center text-sm font-medium">
+                            <td class="px-6 py-4">
                                 <a href="/admin/posts/{{$post->id}}/edit"
                                    class="text-blue-500 hover:text-blue-600">Edit</a>
                             </td>
 
-                            <td class="text-center text-sm font-medium">
+                            <td class="px-6 py-4">
                                 <form action="/admin/posts/{{$post->id}}" method="post">
                                     @csrf
                                     @method('DELETE')

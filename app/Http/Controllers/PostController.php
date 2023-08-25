@@ -9,8 +9,11 @@ use Illuminate\Validation\Rule;
 class PostController extends Controller
 {
     public function index(){
-        $post = Post::latest()
-            ->with(['category', 'author'])->paginate(15)->withQueryString();
+
+        $post = Post::latest()->where('status', '=', true)
+            ->with(['category', 'author'])
+            ->orderBy('id', 'desc')
+            ->paginate(15);
 
         return view('posts.index', compact('post'));
     }
