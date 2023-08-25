@@ -37,7 +37,8 @@ Route::patch('/profile/{user}/update', [UserController::class, 'update'])->middl
 
 Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth');
 Route::post('/posts/publish', [PostController::class, 'store'])->middleware('auth');
-Route::get('posts/{post:slug}', [PostController::class, 'show']);
+Route::get('posts/{post:slug}', [PostController::class, 'show'])->middleware('posted');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::patch('/posts/{post}', [PostController::class, 'publish'])->name('posts.publish');
 
 Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware('admin');

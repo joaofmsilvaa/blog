@@ -9,8 +9,11 @@ use Illuminate\Validation\Rule;
 class PostController extends Controller
 {
     public function index(){
-        $post = Post::latest()
-            ->with(['category', 'author'])->paginate(15)->withQueryString();
+
+        $post = Post::latest()->where('status', '=', true)
+            ->with(['category', 'author'])
+            ->orderBy('id', 'desc')
+            ->paginate(15);
 
         return view('posts.index', compact('post'));
     }
@@ -41,6 +44,12 @@ class PostController extends Controller
 
     public function show(Post $post){
 
+        if(request()->route('post')->status == 0 && auth()->user()?->username == 'joao'){
+            $isPosted = true;
+        }
+        else{
+            $isPosted = false;
+        }
 
         if (auth()->user()?->id == $post->author->id) {
             $canDelete = true;
@@ -49,7 +58,7 @@ class PostController extends Controller
         }
 
         $post = Post::where('id', $post->id)->first();
-        return view('posts.show', ['post' => $post, 'canDelete' => $canDelete]);
+        return view('posts.show', ['post' => $post, 'canDelete' => $canDelete, 'isPosted' => $isPosted]);
 
     }
 
@@ -62,6 +71,14 @@ class PostController extends Controller
         }
 
         return redirect('/')->with('success', 'Post deleted');
+    }
+
+    public function publish(Post $post){
+        $post['status'] = true;
+
+        $post->update();
+
+        return back()->with('success', 'Post published');
     }
 
 }

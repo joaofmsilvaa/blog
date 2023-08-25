@@ -13,6 +13,7 @@ class UserController extends Controller
     public function create(User $user)
     {
         $posts = Post::latest()->where('user_id', '=', $user->id)
+            ->where('status', '=', true)
             ->orderBy('id', 'desc')
             ->paginate(15);
 
