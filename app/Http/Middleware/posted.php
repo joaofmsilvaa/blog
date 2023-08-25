@@ -16,7 +16,7 @@ class posted
     public function handle(Request $request, Closure $next): Response
     {
 
-        if($request->route('post')->status == 0 && auth()->user()->username != 'joao'){
+        if($request->route('post')->status == 0 && auth()->user()?->username != 'joao'){
             abort(403);
         }
 

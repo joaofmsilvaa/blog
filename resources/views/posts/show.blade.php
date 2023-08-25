@@ -36,18 +36,32 @@
                                     href="/?author={{$post->author->username}}"> {{$post->author->name}}</a></h5>
                             <h6><a href="/?author={{$post->author->username}}">{{$post->author->username}}</a></h6>
 
-                            @auth
-                                @if ($canDelete)
-                                    <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="bg-red-600 transition hover:bg-red-400 rounded text-white p-1 mt-3">Delete
-                                            Post
-                                        </button>
-                                    </form>
-                                @endif
-                            @endauth
+                            @if($canDelete || $isPosted)
+                                <div>
+                                    @if ($canDelete)
+                                        <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                    class="bg-red-600 transition hover:bg-red-400 rounded text-white p-1 mt-3">
+                                                Delete
+                                                Post
+                                            </button>
+                                        </form>
+                                    @endif
 
+                                    @if($isPosted)
+                                        <form method="POST" action="{{ route('posts.publish', $post->id) }}">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit"
+                                                    class="bg-green-600 transition hover:bg-green-400 rounded text-white p-1 mt-3">
+                                                Publish
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
