@@ -11,8 +11,7 @@ class PostController extends Controller
     public function index(){
 
         $post = Post::latest()->where('status', '=', true)
-            ->with(['category', 'author'])
-            ->orderBy('id', 'desc')
+            ->with(['category', 'author', 'comment'])
             ->paginate(15);
 
         return view('posts.index', compact('post'));
