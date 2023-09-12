@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPostController;
+use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -40,5 +41,6 @@ Route::post('/posts/publish', [PostController::class, 'store'])->middleware('aut
 Route::get('posts/{post:slug}', [PostController::class, 'show'])->middleware('posted');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 Route::patch('/posts/{post}', [PostController::class, 'publish'])->name('posts.publish');
+Route::post('posts/{post:slug}/comments', [PostCommentController::class, 'store']);
 
 Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware('admin');

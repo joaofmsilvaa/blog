@@ -2,8 +2,8 @@
 <x-pannel class="bg-gray-50">
     <article class="flex space-x-4">
         <div class="flex-shrink-0">
-            @if(isset($post->author->profilePicture))
-                <img src="/storage/{{$post->author->profilePicture}}" alt="Profile picture"
+            @if(isset($comment->user->profilePicture))
+                <img src="/storage/{{$comment->user->profilePicture}}" alt="Profile picture"
                      class="w-14 rounded-full">
 
             @else
