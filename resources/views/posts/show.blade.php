@@ -98,6 +98,11 @@
 
                 </div>
             </article>
+
+            @foreach($post->comment as $comment)
+                <x-comment :comment="$comment"/>
+            @endforeach
+
         </main>
 
     </section>
