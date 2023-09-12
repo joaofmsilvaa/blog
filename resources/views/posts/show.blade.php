@@ -101,7 +101,6 @@
 
             <section class="col-span-8 col-start-5 mt-10 space-y-5">
                 @include('posts._addCommentForm')
-
                 @foreach($post->comment as $comment)
                     <x-comment :comment="$comment"/>
                 @endforeach
