@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class PostCommentController extends Controller
+class CommentController extends Controller
 {
     public function store(Post $post){
 
@@ -20,5 +21,16 @@ class PostCommentController extends Controller
         ]);
 
         return back()->with('success', 'Comment added');
+    }
+
+    public function destroy(Comment $comment){
+
+        if (auth()->user()?->id == $comment->user->id || auth()->user()?->username == 'joao') {
+            $comment->delete();
+        } else {
+            abort(403);
+        }
+
+        return back()->with('success', 'Comment deleted');
     }
 }
