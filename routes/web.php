@@ -1,11 +1,9 @@
 <?php
 
-<<<<<<< Updated upstream
+
 use App\Http\Controllers\AdminPostController;
-=======
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
->>>>>>> Stashed changes
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -46,13 +44,17 @@ Route::get('posts/{post:slug}', [PostController::class, 'show'])->middleware('po
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 Route::patch('/posts/{post}', [PostController::class, 'publish'])->name('posts.publish');
 
-<<<<<<< Updated upstream
-Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware('admin');
-=======
+
 Route::post('posts/{post:slug}/comments', [CommentController::class, 'store']);
 Route::delete('/posts/comments/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
 Route::get('/admin/posts', [AdminController::class, 'indexPosts'])->middleware('admin');
+Route::get('/admin/posts/{post}/edit', [AdminController::class, 'editPost'])->middleware('admin');
+Route::patch('/admin/posts/{post}', [AdminController::class, 'updatePost'])->middleware('admin');
+
 Route::get('/admin/categories', [AdminController::class, 'indexCategories'])->middleware('admin');
+Route::get('/admin/categories/{category}/edit', [AdminController::class, 'editCategory'])->middleware('admin');
+
 Route::get('/admin/users', [AdminController::class, 'indexUsers'])->middleware('admin');
->>>>>>> Stashed changes
+Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->middleware('admin');
+
