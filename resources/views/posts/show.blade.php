@@ -33,7 +33,7 @@
                         @endif
                         <div class="ml-3 text-left">
                             <h5 class="font-bold"><a
-                                    href="/?author={{$post->author->username}}"> {{$post->author->name}}</a></h5>
+                                        href="/?author={{$post->author->username}}"> {{$post->author->name}}</a></h5>
                             <h6><a href="/?author={{$post->author->username}}">{{$post->author->username}}</a></h6>
 
                             @if($canDelete || $isPosted)
@@ -98,6 +98,15 @@
 
                 </div>
             </article>
+
+            <section class="col-span-8 col-start-5 mt-10 space-y-5">
+                @include('posts._addCommentForm')
+
+                @foreach($post->comment as $comment)
+                    <x-comment :comment="$comment"/>
+                @endforeach
+            </section>
+
         </main>
 
     </section>
