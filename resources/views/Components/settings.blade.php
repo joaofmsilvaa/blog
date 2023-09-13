@@ -9,10 +9,13 @@
             <h4 class="font-semibold">Links:</h4>
             <ul class="flex">
                 <li class="px-3">
-                    <a href="/admin/posts" class="{{request()->is('admin/posts') ? 'text-blue-500' : ''}}">All posts</a>
+                    <a href="/admin/posts" class="{{request()->is('admin/posts') ? 'text-blue-500' : ''}}">All Posts</a>
                 </li>
                 <li class="px-3">
-                    <a href="/admin/posts/create" class="{{request()->is('admin/posts/create') ? 'text-blue-500' : ''}}">New Post</a>
+                    <a href="/admin/categories" class="{{request()->is('admin/categories') ? 'text-blue-500' : ''}}">All Categories</a>
+                </li>
+                <li class="px-3">
+                    <a href="/admin/posts" class="{{request()->is('admin/users') ? 'text-blue-500' : ''}}">All Users</a>
                 </li>
             </ul>
         </aside>
