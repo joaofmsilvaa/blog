@@ -2,7 +2,7 @@
 
 @section('content')
     <x-settings heading="Edit Post: {{ $post->title}}">
-        <form method="POST" action="/admin/posts/{{$post->id}}"  >
+        <form method="POST" action="/admin/posts/{{$post->id}}" enctype="multipart/form-data" >
             @csrf
             @method('PATCH')
 
@@ -12,11 +12,11 @@
 
             <div class="flex-col mt-6">
                 <div class="my-3">
-                    @if(isset($post->thumbnail))
-                        <img src="{{ asset('storage/' . $post->thumbnail) }}" id="image_preview" alt="Blog Post thumbnail" class="rounded-xl w-1/2 h-96 object-cover border-2 border-black-500">
-                    @else
-                        <img src="{{ asset('images/illustration1.png' . $post->thumbnail) }}" id="image_preview" alt="Blog Post thumbnail" class="rounded-xl w-1/2 h-96 object-cover border-2 border-black-500">
-                    @endif
+                    <img src="{{ asset('storage/' . $post->thumbnail) }}"
+                         id="image_preview"
+                         alt="Blog Post thumbnail"
+                         class="rounded-xl w-1/2 h-96 object-cover border-2 border-black-500"
+                         :value="old('thumbnail', $post->thumbnail)">
                 </div>
                 <div>
                     <x-form.formInput name="thumbnail" type="file"/>
