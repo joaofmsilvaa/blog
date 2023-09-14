@@ -43,14 +43,12 @@ class AdminController extends Controller
             'category_id' => ['required', Rule::exists('categories', 'id')],
         ]);
 
-        dd($attributes);
-
         if(isset($attributes['thumbnail'])){
-            $attributes['user_id'] = auth()->id();
             $storingPath = request()->file('thumbnail')->store('public/thumbnails');
             $attributes['thumbnail'] = str_replace("public/", "",$storingPath);
 
         }
+
 
         $post->update($attributes);
 
