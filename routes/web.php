@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Http\Controllers\AdminPostController;
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
@@ -57,4 +57,3 @@ Route::get('/admin/categories/{category}/edit', [AdminController::class, 'editCa
 
 Route::get('/admin/users', [AdminController::class, 'indexUsers'])->middleware('admin');
 Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->middleware('admin');
-
