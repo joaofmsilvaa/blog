@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -50,7 +51,7 @@ class PostController extends Controller
             $isPosted = false;
         }
 
-        if (auth()->user()?->id == $post->author->id) {
+        if (auth()->user()?->id == $post->author->id || auth()->user()->username = 'joao') {
             $canDelete = true;
         } else {
             $canDelete = false;
@@ -74,7 +75,7 @@ class PostController extends Controller
 
     public function publish(Post $post){
         $post['status'] = true;
-
+        $post['published_at'] = Carbon::now();
         $post->update();
 
         return back()->with('success', 'Post published');

@@ -39,7 +39,7 @@
                 </div>
 
                 <p class="text-xs">Posted
-                    <time>{{$comment->created_at->format('F j, Y')}}</time>
+                    <time>{{$comment->created_at->diffForHumans()}}</time>
                 </p>
             </header>
 
