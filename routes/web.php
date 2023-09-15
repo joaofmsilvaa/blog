@@ -1,7 +1,6 @@
 <?php
 
 
-
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
@@ -51,9 +50,12 @@ Route::delete('/posts/comments/{comment}', [CommentController::class, 'destroy']
 Route::get('/admin/posts', [AdminController::class, 'indexPosts'])->middleware('admin');
 Route::get('/admin/posts/{post}/edit', [AdminController::class, 'editPost'])->middleware('admin');
 Route::patch('/admin/posts/{post}', [AdminController::class, 'updatePost'])->middleware('admin');
+Route::delete('/admin/posts/{post}', [AdminController::class, 'destroyPost'])->middleware('admin');
 
 Route::get('/admin/categories', [AdminController::class, 'indexCategories'])->middleware('admin');
 Route::get('/admin/categories/{category}/edit', [AdminController::class, 'editCategory'])->middleware('admin');
+Route::delete('/admin/categories/{category}', [AdminController::class, 'destroyCategory'])->middleware('admin');
+
 
 Route::get('/admin/users', [AdminController::class, 'indexUsers'])->middleware('admin');
 Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->middleware('admin');
