@@ -11,6 +11,11 @@ class Post extends Model
 
     protected $guarded = [];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'published_at'
+    ];
 
     public function category()
     {

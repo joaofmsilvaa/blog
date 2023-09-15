@@ -3,7 +3,6 @@
 @props(['post', 'categories'])
 
 @section('content')
-
     <section class="px-6 py-2">
 
         <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
@@ -17,10 +16,12 @@
                              class="rounded-xl">
                     @endif
 
+
                     <p class="mt-4 block text-gray-400 text-xs">
                         Published
                         <time>{{$post->created_at->diffForHumans()}}</time>
                     </p>
+
 
                     <div class="flex items-center lg:justify-center text-sm mt-4">
                         @if(isset($post->author->profilePicture))
@@ -99,14 +100,23 @@
                 </div>
             </article>
 
-            <section class="col-span-8 col-start-5 mt-10 space-y-5">
-                @include('posts._addCommentForm')
+            @if(!$isPosted)
+                <section class="col-span-8 col-start-5 mt-10 space-y-5">
+                    @include('posts._addCommentForm')
 
-                @foreach($post->comment as $comment)
-                    <x-comment :comment="$comment"/>
-                @endforeach
-            </section>
+                    @if($post->comment()->count() > 0)
+                        @foreach($post->comment as $comment)
+                            <x-comment :comment="$comment"/>
+                        @endforeach
 
+                    @else
+                        <x-pannel>
+                            This post has no comments yet.
+                        </x-pannel>
+
+                    @endif
+                </section>
+            @endif
         </main>
 
     </section>
