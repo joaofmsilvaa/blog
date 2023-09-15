@@ -65,7 +65,10 @@
                                     @csrf
                                     @method('DELETE')
 
-                                    <button class="text-red-500 hover:text-red-600">Delete</button>
+                                    <button class="text-red-500 hover:text-red-600"
+                                            onclick="return confirm('By clicking \'ok\' you confirm that you are aware that the post will be permanently deleted?')">
+                                        Delete</button>
+
                                 </form>
                             </td>
                         </tr>
