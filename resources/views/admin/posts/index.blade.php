@@ -18,6 +18,9 @@
                         Status
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Posted at
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Edit
                     </th>
                     <th scope="col" class="px-3 py-3">
@@ -54,6 +57,14 @@
 
                             </td>
 
+                            <td class="px-6 py-4">
+                                @if(isset($post->status) && $post->status)
+                                    <p class="text-sm">{{$post->published_at}}</p>
+                                @else
+                                    <p class="text-sm text-gray-400">Null</p>
+                                @endif
+
+                            </td>
 
                             <td class="px-6 py-4">
                                 <a href="/admin/posts/{{$post->id}}/edit"

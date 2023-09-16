@@ -10,8 +10,12 @@ use Illuminate\Validation\Rule;
 class AdminController extends Controller
 {
     public function indexPosts(){
+
+        $posts = Post::orderByRaw('status DESC')
+            ->paginate(15);
+
         return view('admin.posts.index', [
-            'posts' => Post::paginate(15)
+            'posts' => $posts
         ]);
     }
 
