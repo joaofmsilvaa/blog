@@ -77,9 +77,7 @@
 
     <script>
         const profileImageInput = document.getElementById('thumbnail');
-        const divPreview1 = document.getElementById('div_preview1');
-
-        const imagePreview1 = document.getElementById('image_preview1');
+        const imagePreview = document.getElementById('image_preview1');
 
 
         profileImageInput.addEventListener('change', function (event) {
@@ -88,19 +86,15 @@
             if (file) {
                 const reader = new FileReader();
 
-                reader.onload = function (e) {
-                    imagePreview1.src = e.target.result;
-                    divPreview1.style.display = 'block';
-
-
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
                 }
 
                 reader.readAsDataURL(file);
             } else {
-                imagePreview1.src = e.target.result;
-
-                divPreview1.style.display = 'none';
-
+                imagePreview.src = '#';
+                imagePreview.style.display = 'none';
             }
         });
     </script>
