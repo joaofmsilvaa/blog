@@ -29,5 +29,9 @@ class AppServiceProvider extends ServiceProvider
             return request()->route('user')->id == auth()->user()->id;
         });
 
+        Gate::define('posted', function (){
+            return request()->route('post')->status == 0 && auth()->user()->username == 'joao';
+        });
+
     }
 }

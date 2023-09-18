@@ -17,7 +17,7 @@
                             src="/storage/{{$user->profilePicture}}" alt="Preview"
                             alt="profile picture"
                             class="object-cover border-b-2 shadow-2xl"
-                            :value="old('thumbnail', $user->profilePicture)"
+                            :value="old('profilePicture', $user->profilePicture)"
                         >
                     </div>
                     <div class="flex mt-6">
