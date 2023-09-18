@@ -6,10 +6,13 @@
             @csrf
             @method('PATCH')
 
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
             <x-form.formInput name="title" value="{{$post->title}}"/>
 
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug</label>
             <x-form.formInput name="slug" value="{{$post->slug}}"/>
 
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thumbnail</label>
             <div class="flex-col mt-6">
                 <div class="my-3">
                     <img src="{{ asset('storage/' . $post->thumbnail) }}"
@@ -23,13 +26,14 @@
                 </div>
             </div>
 
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Excerpt</label>
             <x-form.textarea name="excerpt">{{$post->excerpt}}</x-form.textarea>
 
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
             <x-form.textarea name="body">{{$post->body}}</x-form.textarea>
 
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
             <div class="mb-6">
-                <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
-                       for="category_id">Category</label>
 
                 <select name="category_id" id="category_id">
                     @php
