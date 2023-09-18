@@ -39,8 +39,8 @@ class AdminController extends Controller
     public function updateCategory(Category $category){
 
         $attributes = request()->validate([
-            'name'=>'required',
-            'slug' => 'required',
+            'name'=>['required', Rule::unique('categories', 'name')->ignore($category->id)],
+            'slug' => ['required', Rule::unique('categories', 'slug')->ignore($category->id)],
         ]);
 
         $category->update($attributes);

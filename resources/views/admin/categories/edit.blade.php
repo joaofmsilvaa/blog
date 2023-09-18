@@ -6,8 +6,10 @@
             @csrf
             @method('PATCH')
 
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
             <x-form.formInput name="name" value="{{$category->name}}"/>
 
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug</label>
             <x-form.formInput name="slug" value="{{$category->slug}}"/>
 
             <div class="flex justify-end mt-2 border-t border-gray-300">
