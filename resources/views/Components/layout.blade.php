@@ -21,7 +21,9 @@
 
 </head>
 <body>
+
 <x-navbar/>
+
 
 <div class="text-center mx-w-3xl mt-10">
 

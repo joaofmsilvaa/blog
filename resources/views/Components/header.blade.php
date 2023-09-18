@@ -1,4 +1,4 @@
-<div class="w-full p-5 flex flex-col items-center">
+<div class="w-full p-5 flex flex-col items-center mt-4">
     <img src="/images/logo.png" class="w-48">
     <h1 class="text-3xl self-center font-semibold whitespace-nowrap">Welcome to
         <span class=" dark:text-white">

@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
     public function index(){
+
+        $filters = request(['search']);
+
         $post = Post::latest()
-            ->with(['category', 'author'])->paginate(15)->withQueryString();
+            ->filter($filters)
+            ->where('status', '=', true)
+            ->with(['category', 'author', 'comment'])
+            ->paginate(15);
 
         return view('posts.index', compact('post'));
     }
@@ -41,15 +48,21 @@ class PostController extends Controller
 
     public function show(Post $post){
 
+        if(request()->route('post')->status == 0 && auth()->user()?->username == 'joao'){
+            $isPosted = true;
+        }
+        else{
+            $isPosted = false;
+        }
 
-        if (auth()->user()?->id == $post->author->id) {
+        if (auth()->user()?->id == $post->author->id || auth()->user()->username = 'joao') {
             $canDelete = true;
         } else {
             $canDelete = false;
         }
 
         $post = Post::where('id', $post->id)->first();
-        return view('posts.show', ['post' => $post, 'canDelete' => $canDelete]);
+        return view('posts.show', ['post' => $post, 'canDelete' => $canDelete, 'isPosted' => $isPosted]);
 
     }
 
@@ -62,6 +75,14 @@ class PostController extends Controller
         }
 
         return redirect('/')->with('success', 'Post deleted');
+    }
+
+    public function publish(Post $post){
+        $post['status'] = true;
+        $post['published_at'] = Carbon::now();
+        $post->update();
+
+        return back()->with('success', 'Post published');
     }
 
 }
