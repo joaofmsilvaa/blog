@@ -36,6 +36,20 @@ class AdminController extends Controller
         return view('admin.categories.edit', ['category' => $category]);
     }
 
+    public function updateCategory(Category $category){
+
+        $attributes = request()->validate([
+            'name'=>'required',
+            'slug' => 'required',
+        ]);
+
+        $category->update($attributes);
+
+        return back()->with('success', 'Category updated');
+
+    }
+
+
     public function updatePost(Post $post){
 
         $attributes = request()->validate([

@@ -55,7 +55,7 @@ Route::delete('/admin/posts/{post}', [AdminController::class, 'destroyPost'])->m
 Route::get('/admin/categories', [AdminController::class, 'indexCategories'])->middleware('admin');
 Route::get('/admin/categories/{category}/edit', [AdminController::class, 'editCategory'])->middleware('admin');
 Route::delete('/admin/categories/{category}', [AdminController::class, 'destroyCategory'])->middleware('admin');
-
+Route::patch('/admin/categories/{category}', [AdminController::class, 'updateCategory'])->middleware('admin');
 
 Route::get('/admin/users', [AdminController::class, 'indexUsers'])->middleware('admin');
 Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->middleware('admin');
