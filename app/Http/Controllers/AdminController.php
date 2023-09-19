@@ -24,7 +24,7 @@ class AdminController extends Controller
         return view('admin.posts.edit', ['post' => $post]);
     }
 
-<<<<<<< Updated upstream
+
     public function editCategory(Category $category){
         return view('admin.categories.edit', ['category' => $category]);
     }
@@ -41,9 +41,6 @@ class AdminController extends Controller
         return back()->with('success', 'Category updated');
 
     }
-
-=======
->>>>>>> Stashed changes
 
     public function updatePost(Post $post){
 
@@ -82,23 +79,6 @@ class AdminController extends Controller
         return view('admin.categories.index', [
             'categories' => $categories
         ]);
-    }
-
-    public function editCategory(Category $category){
-        return view('admin.categories.edit', ['category' => $category]);
-    }
-
-    public function updateCategory(Category $category){
-
-        $attributes = request()->validate([
-            'name'=>'required',
-            'slug' => 'required',
-        ]);
-
-        $category->update($attributes);
-
-        return back()->with('success', 'Category updated');
-
     }
 
     public function destroyCategory(Category $category){
