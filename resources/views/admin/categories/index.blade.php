@@ -1,7 +1,7 @@
 @extends ('components.layout')
 
 @section('content')
-    <x-settings heading="Manage Posts">
+    <x-settings heading="Manage Categories">
 
         <div class="overflow-x-auto">
             @if($categories->count() > 0)
