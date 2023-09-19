@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -19,19 +20,11 @@ class AdminController extends Controller
         ]);
     }
 
-    public function indexCategories(){
-
-        $categories = Category::withCount('posts')->paginate(15);
-
-        return view('admin.categories.index', [
-            'categories' => $categories
-        ]);
-    }
-
     public function editPost(Post $post){
         return view('admin.posts.edit', ['post' => $post]);
     }
 
+<<<<<<< Updated upstream
     public function editCategory(Category $category){
         return view('admin.categories.edit', ['category' => $category]);
     }
@@ -49,6 +42,8 @@ class AdminController extends Controller
 
     }
 
+=======
+>>>>>>> Stashed changes
 
     public function updatePost(Post $post){
 
@@ -80,10 +75,46 @@ class AdminController extends Controller
         return back()->with('success', 'Post deleted');
     }
 
+    public function indexCategories(){
+
+        $categories = Category::withCount('posts')->paginate(15);
+
+        return view('admin.categories.index', [
+            'categories' => $categories
+        ]);
+    }
+
+    public function editCategory(Category $category){
+        return view('admin.categories.edit', ['category' => $category]);
+    }
+
+    public function updateCategory(Category $category){
+
+        $attributes = request()->validate([
+            'name'=>'required',
+            'slug' => 'required',
+        ]);
+
+        $category->update($attributes);
+
+        return back()->with('success', 'Category updated');
+
+    }
+
     public function destroyCategory(Category $category){
         $category->delete();
 
         return back()->with('success', 'Category deleted');
+    }
+
+    public function indexUsers(){
+
+        $users = User::orderByRaw('created_at DESC')
+            ->paginate(15);
+
+        return view('admin.users.index', [
+            'users' => $users
+        ]);
     }
 
 }
