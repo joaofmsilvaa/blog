@@ -24,6 +24,7 @@ class AdminController extends Controller
         return view('admin.posts.edit', ['post' => $post]);
     }
 
+
     public function editCategory(Category $category){
         return view('admin.categories.edit', ['category' => $category]);
     }

@@ -5,9 +5,9 @@
     <div class="py-6 px-5 lg:flex">
         <div class="flex-1 lg:mr-8">
             @if(isset($post->thumbnail))
-                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post thumbnail" class="rounded-xl">
+                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post thumbnail" class="rounded-xl w-full h-96 object-cover">
             @else
-                <img src="{{ asset('images/illustration1.png' . $post->thumbnail) }}" alt="Blog Post thumbnail" class="rounded-xl">
+                <img src="{{ asset('images/illustration1.png' . $post->thumbnail) }}" alt="Blog Post thumbnail" class="rounded-xl w-full h-96 object-cover">
             @endif
         </div>
 

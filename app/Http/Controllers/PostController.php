@@ -11,7 +11,11 @@ class PostController extends Controller
 {
     public function index(){
 
-        $post = Post::latest()->where('status', '=', true)
+        $filters = request(['search']);
+
+        $post = Post::latest()
+            ->filter($filters)
+            ->where('status', '=', true)
             ->with(['category', 'author', 'comment'])
             ->paginate(15);
 
