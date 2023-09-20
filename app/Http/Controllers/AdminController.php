@@ -97,4 +97,29 @@ class AdminController extends Controller
         ]);
     }
 
+    public function editUser(User $user){
+        return view('admin.users.edit', ['user' => $user]);
+    }
+
+    public function updateUser(User $user){
+
+        $attributes = request()->validate([
+            'name' => ['required','max:255'],
+            'username' => ['required','max:16', 'min:3', Rule::unique('users', 'username')->ignore($user->id)],
+            'profilePicture' => ['image'],
+            'description' => ['max:255']
+        ]);
+
+        if(isset($attributes['profilePicture'])){
+            $storingPath = request()->file('profilePicture')->store('public/profilePictures');
+            $attributes['profilePicture'] = str_replace("public/", "", $storingPath);
+        }
+
+
+        $user->update($attributes);
+
+        return back()->with('success', 'User Updated');
+
+    }
+
 }
