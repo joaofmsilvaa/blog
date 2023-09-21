@@ -38,7 +38,7 @@ class AdminController extends Controller
 
         $category->update($attributes);
 
-        return back()->with('success', 'Category updated');
+        return back()->with('success', 'Category Updated');
 
     }
 
@@ -62,14 +62,14 @@ class AdminController extends Controller
 
         $post->update($attributes);
 
-        return back()->with('success', 'Post updated');
+        return back()->with('success', 'Post Updated');
 
     }
 
     public function destroyPost(Post $post){
         $post->delete();
 
-        return back()->with('success', 'Post deleted');
+        return back()->with('success', 'Post Deleted');
     }
 
     public function indexCategories(){
@@ -84,7 +84,7 @@ class AdminController extends Controller
     public function destroyCategory(Category $category){
         $category->delete();
 
-        return back()->with('success', 'Category deleted');
+        return back()->with('success', 'Category Deleted');
     }
 
     public function indexUsers(){
@@ -106,6 +106,7 @@ class AdminController extends Controller
         $attributes = request()->validate([
             'name' => ['required','max:255'],
             'username' => ['required','max:16', 'min:3', Rule::unique('users', 'username')->ignore($user->id)],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
             'profilePicture' => ['image'],
             'description' => ['max:255']
         ]);
@@ -120,6 +121,12 @@ class AdminController extends Controller
 
         return back()->with('success', 'User Updated');
 
+    }
+
+    public function destroyUser(User $user){
+        $user->delete();
+
+        return back()->with('success', 'User Deleted');
     }
 
 }

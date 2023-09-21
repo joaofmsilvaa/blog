@@ -46,6 +46,9 @@
                 <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                 <x-form.formInput name="username" value="{{$user->username}}"/>
 
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
+                <x-form.formInput name="email" value="{{$user->email}}"/>
+
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                 <x-form.textarea name="description">{{$user->description}}</x-form.textarea>
 
