@@ -22,11 +22,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index']);
 
+
 Route::get('register', [RegisterController::class, 'create']);
+Route::get('login', [SessionController::class, 'create']);
+
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
 
-Route::get('login', [SessionController::class, 'create'])->middleware('guest')->name('login');
+Route::get('login', [SessionController::class, 'create'])->middleware('guest');
 Route::post('sessions', [SessionController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth');
 
@@ -36,12 +39,11 @@ Route::patch('/profile/{user}/update', [UserController::class, 'update'])->middl
 
 Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth');
 Route::post('/posts/publish', [PostController::class, 'store'])->middleware('auth');
-Route::get('/posts/{post:slug}', [PostController::class, 'show'])->middleware('posted', 'addView');
-Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::get('/posts/{post:slug}', [PostController::class, 'show'])->middleware('posted');
 Route::patch('/posts/{post}', [PostController::class, 'publish'])->name('posts.publish');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
-
-Route::post('posts/{post:slug}/comments', [CommentController::class, 'store']);
+Route::post('/posts/{post:slug}/comments', [CommentController::class, 'store']);
 Route::delete('/posts/comments/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
 Route::get('/admin/posts', [AdminController::class, 'indexPosts'])->middleware('admin');
@@ -51,8 +53,10 @@ Route::delete('/admin/posts/{post}', [AdminController::class, 'destroyPost'])->m
 
 Route::get('/admin/categories', [AdminController::class, 'indexCategories'])->middleware('admin');
 Route::get('/admin/categories/{category}/edit', [AdminController::class, 'editCategory'])->middleware('admin');
-Route::delete('/admin/categories/{category}', [AdminController::class, 'destroyCategory'])->middleware('admin');
 Route::patch('/admin/categories/{category}', [AdminController::class, 'updateCategory'])->middleware('admin');
+Route::delete('/admin/categories/{category}', [AdminController::class, 'destroyCategory'])->middleware('admin');
 
 Route::get('/admin/users', [AdminController::class, 'indexUsers'])->middleware('admin');
 Route::get('/admin/users/{user}/edit', [AdminController::class, 'editUser'])->middleware('admin');
+Route::patch('/admin/users/{user}', [AdminController::class, 'updateUser'])->middleware('admin');
+Route::delete('/admin/users/{user}', [AdminController::class, 'destroyUser'])->middleware('admin');

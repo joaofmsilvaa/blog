@@ -1,9 +1,9 @@
 @extends ('components.layout')
 
 @section('content')
-    <x-settings heading="Manage Posts">
+    <x-settings heading="Manage Categories">
 
-        <div class="relative overflow-x-auto">
+        <div class="overflow-x-auto">
             @if($categories->count() > 0)
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 flex-1">

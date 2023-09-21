@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -19,18 +20,10 @@ class AdminController extends Controller
         ]);
     }
 
-    public function indexCategories(){
-
-        $categories = Category::withCount('posts')->paginate(15);
-
-        return view('admin.categories.index', [
-            'categories' => $categories
-        ]);
-    }
-
     public function editPost(Post $post){
         return view('admin.posts.edit', ['post' => $post]);
     }
+
 
     public function editCategory(Category $category){
         return view('admin.categories.edit', ['category' => $category]);
@@ -39,16 +32,15 @@ class AdminController extends Controller
     public function updateCategory(Category $category){
 
         $attributes = request()->validate([
-            'name'=>'required',
-            'slug' => 'required',
+            'name'=>['required', Rule::unique('categories', 'name')->ignore($category->id)],
+            'slug' => ['required', Rule::unique('categories', 'slug')->ignore($category->id)],
         ]);
 
         $category->update($attributes);
 
-        return back()->with('success', 'Category updated');
+        return back()->with('success', 'Category Updated');
 
     }
-
 
     public function updatePost(Post $post){
 
@@ -70,20 +62,71 @@ class AdminController extends Controller
 
         $post->update($attributes);
 
-        return back()->with('success', 'Post updated');
+        return back()->with('success', 'Post Updated');
 
     }
 
     public function destroyPost(Post $post){
         $post->delete();
 
-        return back()->with('success', 'Post deleted');
+        return back()->with('success', 'Post Deleted');
+    }
+
+    public function indexCategories(){
+
+        $categories = Category::withCount('posts')->paginate(15);
+
+        return view('admin.categories.index', [
+            'categories' => $categories
+        ]);
     }
 
     public function destroyCategory(Category $category){
         $category->delete();
 
-        return back()->with('success', 'Category deleted');
+        return back()->with('success', 'Category Deleted');
+    }
+
+    public function indexUsers(){
+
+        $users = User::orderByRaw('created_at DESC')
+            ->paginate(15);
+
+        return view('admin.users.index', [
+            'users' => $users
+        ]);
+    }
+
+    public function editUser(User $user){
+        return view('admin.users.edit', ['user' => $user]);
+    }
+
+    public function updateUser(User $user){
+
+        $attributes = request()->validate([
+            'name' => ['required','max:255'],
+            'username' => ['required','max:16', 'min:3', Rule::unique('users', 'username')->ignore($user->id)],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
+            'profilePicture' => ['image'],
+            'description' => ['max:255']
+        ]);
+
+        if(isset($attributes['profilePicture'])){
+            $storingPath = request()->file('profilePicture')->store('public/profilePictures');
+            $attributes['profilePicture'] = str_replace("public/", "", $storingPath);
+        }
+
+
+        $user->update($attributes);
+
+        return back()->with('success', 'User Updated');
+
+    }
+
+    public function destroyUser(User $user){
+        $user->delete();
+
+        return back()->with('success', 'User Deleted');
     }
 
 }

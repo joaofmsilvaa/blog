@@ -5,22 +5,22 @@
     <div class="flex justify-center mt-3 p-8">
         <div class="p-8 w-3/4 justify-center bg-gray-50 rounded-xl">
             <h1 class="text-xl text-blue-600" >Edit profile</h1>
-            <form method="POST" action="/profile/{{$user->id}}/update" enctype="multipart/form-data">
+            <form method="POST" action="/admin/users/{{$user->id}}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
 
                 <div class="flex flex-col items-center mt-6">
                     @if(isset($user->profilePicture))
-                    <div
-                        class="sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-32 lg:h-32 w-24 h-24 rounded-full overflow-hidden object-cover">
-                        <img
-                            id="image_preview"
-                            src="/storage/{{$user->profilePicture}}" alt="Preview"
-                            alt="profile picture"
-                            class="object-cover border-b-2 shadow-2xl"
-                            :value="old('profilePicture', $user->profilePicture)"
-                        >
-                    </div>
+                        <div
+                            class="sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-32 lg:h-32 w-24 h-24 rounded-full overflow-hidden object-cover">
+                            <img
+                                id="image_preview"
+                                src="/storage/{{$user->profilePicture}}" alt="Preview"
+                                alt="profile picture"
+                                class="object-cover border-b-2 shadow-2xl"
+                                :value="old('profilePicture', $user->profilePicture)"
+                            >
+                        </div>
                     @else
                         <div
                             class="sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-32 lg:h-32 w-24 h-24 rounded-full overflow-hidden object-cover">
@@ -45,6 +45,9 @@
 
                 <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                 <x-form.formInput name="username" value="{{$user->username}}"/>
+
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
+                <x-form.formInput name="email" value="{{$user->email}}"/>
 
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                 <x-form.textarea name="description">{{$user->description}}</x-form.textarea>

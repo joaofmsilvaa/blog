@@ -15,7 +15,7 @@
                     <a href="/admin/categories" class="{{request()->is('admin/categories') ? 'text-blue-500' : ''}}">All Categories</a>
                 </li>
                 <li class="px-3">
-                    <a href="/admin/posts" class="{{request()->is('admin/users') ? 'text-blue-500' : ''}}">All Users</a>
+                    <a href="/admin/users" class="{{request()->is('admin/users') ? 'text-blue-500' : ''}}">All Users</a>
                 </li>
             </ul>
         </aside>
