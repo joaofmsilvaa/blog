@@ -21,9 +21,8 @@ return new class extends Migration
             $table->text('excerpt');
             $table->text('body');
             $table->boolean('status')->nullable();
-            $table->timestaps();
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
+            $table->integer('view_count')->default(0);
+            $table->timestamps();
             $table->timestamp('published_at')->nullable();
         });
     }

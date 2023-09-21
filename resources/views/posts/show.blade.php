@@ -37,6 +37,13 @@
                                         href="/?author={{$post->author->username}}"> {{$post->author->name}}</a></h5>
                             <h6><a href="/?author={{$post->author->username}}">{{$post->author->username}}</a></h6>
 
+                            <div class="flex items-center ml-2">
+                                <p class="mr-1 text-base text-blue-400">{{$post->view_count}}</p>
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="fill: rgb(96 165 250);" viewBox="0 0 20 14">
+                                    <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                                </svg>
+                            </div>
+
                             @if($canDelete || $isPosted)
                                 <div>
                                     @if ($canDelete)
