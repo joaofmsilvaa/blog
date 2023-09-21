@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\addView;
 use App\Http\Middleware\AdminsOnly;
 use App\Http\Middleware\DeletePost;
 use App\Http\Middleware\posted;
@@ -57,6 +58,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
+        'addView' => addView::class,
         'admin' => AdminsOnly::class,
         'editProfile' => UserEditProfile::class,
         'posted' => posted::class,

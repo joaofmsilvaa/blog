@@ -22,14 +22,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index']);
 
-
 Route::get('register', [RegisterController::class, 'create']);
-Route::get('login', [SessionController::class, 'create']);
-
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
 
-Route::get('login', [SessionController::class, 'create'])->middleware('guest');
+Route::get('login', [SessionController::class, 'create'])->middleware('guest')->name('login');
 Route::post('sessions', [SessionController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth');
 
@@ -39,7 +36,7 @@ Route::patch('/profile/{user}/update', [UserController::class, 'update'])->middl
 
 Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth');
 Route::post('/posts/publish', [PostController::class, 'store'])->middleware('auth');
-Route::get('posts/{post:slug}', [PostController::class, 'show'])->middleware('posted');
+Route::get('/posts/{post:slug}', [PostController::class, 'show'])->middleware('posted', 'addView');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 Route::patch('/posts/{post}', [PostController::class, 'publish'])->name('posts.publish');
 
