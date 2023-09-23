@@ -28,6 +28,10 @@ class Post extends Model
         }
     }
 
+    public function bookmark(){
+        return $this->hasMany(Bookmark::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');

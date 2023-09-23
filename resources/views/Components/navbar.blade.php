@@ -19,12 +19,14 @@
                         </x-dropdown-item>
                     @endcan
 
+                    <x-dropdown-item href="/profile/{{auth()->user()->id}}">Profile
+                    </x-dropdown-item>
+
                     <x-dropdown-item href="/posts/create">New
                         post
                     </x-dropdown-item>
 
-                    <x-dropdown-item href="/profile/{{auth()->user()->id}}">Profile
-                    </x-dropdown-item>
+                    <x-dropdown-item href="/bookmarks/">Bookmarks</x-dropdown-item>
 
                     <x-dropdown-item href="#" x-data="{}"
                                      @click.prevent="document.querySelector('#logout-form').submit()">Log out
