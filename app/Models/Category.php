@@ -16,4 +16,9 @@ class Category extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function bookmark()
+    {
+        return $this->belongsToMany(Bookmark::class);
+    }
 }
