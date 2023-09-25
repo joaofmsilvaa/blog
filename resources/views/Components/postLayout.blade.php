@@ -2,6 +2,23 @@
 
 <article
         {{ $attributes->merge(['class' => 'transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl']) }}>
+    <div class="relative">
+        <div class="absolute right-0 p-2 flex">
+            <form method="POST" action="{{ route('bookmarks.store', $post->id) }}">
+                @csrf
+
+                <button type="submit"
+                        class="bg-gray-800 px-2 rounded-full text-white py-2 text-base flex transition-colors duration-300 hover:bg-yellow-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                         style="fill: rgb(255,255,255);">
+                        <path d="M13 14v-3h3V9h-3V6h-2v3H8v2h3v3z"></path>
+                        <path
+                                d="M20 22V4c0-1.103-.897-2-2-2H6c-1.103 0-2 .897-2 2v18l8-4.572L20 22zM6 10V4h12v14.553l-6-3.428-6 3.428V10z"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
     <div class="py-6 px-5 h-full flex flex-col">
         <div>
             @if(isset($post->thumbnail))
