@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bookmark;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -9,7 +10,8 @@ use Carbon\Carbon;
 
 class PostController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         $filters = request(['search']);
 
@@ -22,36 +24,38 @@ class PostController extends Controller
         return view('posts.index', compact('post'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('posts.create');
     }
 
-    public function store(){
+    public function store()
+    {
 
         $attributes = request()->validate([
-            'title'=>'required',
+            'title' => 'required',
             'thumbnail' => 'required|image',
             'slug' => ['required', Rule::unique('posts', 'slug')],
-            'excerpt'=>['required' , 'min:10', 'max:160'],
-            'body'=>'required',
+            'excerpt' => ['required', 'min:10', 'max:160'],
+            'body' => 'required',
             'category_id' => ['required', Rule::exists('categories', 'id')],
         ]);
 
         $attributes['user_id'] = auth()->id();
         $storingPath = request()->file('thumbnail')->store('public/thumbnails');
-        $attributes['thumbnail'] = str_replace("public/", "",$storingPath);
+        $attributes['thumbnail'] = str_replace("public/", "", $storingPath);
 
         Post::create($attributes);
 
         return redirect('/')->with('success', 'Post created');
     }
 
-    public function show(Post $post){
+    public function show(Post $post)
+    {
 
-        if(request()->route('post')->status == 0 && auth()->user()?->username == 'joao'){
+        if (request()->route('post')->status == 0 && auth()->user()?->username == 'joao') {
             $isPosted = true;
-        }
-        else{
+        } else {
             $isPosted = false;
         }
 
@@ -61,12 +65,22 @@ class PostController extends Controller
             $canDelete = false;
         }
 
+        $bookmarkCheck = Bookmark::where('post_id', $post->id)->where('user_id', '=', auth()->user()?->id)->first();
+
+        if (isset($bookmarkCheck)) {
+            $isBookmarked = true;
+        } else {
+            $isBookmarked = false;
+        }
+
+
         $post = Post::where('id', $post->id)->first();
-        return view('posts.show', ['post' => $post, 'canDelete' => $canDelete, 'isPosted' => $isPosted]);
+        return view('posts.show', ['post' => $post, 'canDelete' => $canDelete, 'isPosted' => $isPosted, 'isBookmarked' => $isBookmarked]);
 
     }
 
-    public function destroy(Post $post){
+    public function destroy(Post $post)
+    {
 
         if (auth()->user()?->id == $post->author->id) {
             $post->delete();
@@ -77,7 +91,8 @@ class PostController extends Controller
         return redirect('/')->with('success', 'Post deleted');
     }
 
-    public function publish(Post $post){
+    public function publish(Post $post)
+    {
         $post['status'] = true;
         $post['published_at'] = Carbon::now();
         $post->update();
