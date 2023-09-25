@@ -55,7 +55,7 @@ class PostController extends Controller
             $isPosted = false;
         }
 
-        if (auth()->user()?->id == $post->author->id || auth()->user()->username = 'joao') {
+        if (auth()->user()?->id == $post->author->id || auth()->user()?->username == 'joao') {
             $canDelete = true;
         } else {
             $canDelete = false;
