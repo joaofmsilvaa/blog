@@ -47,6 +47,8 @@ Route::delete('/posts/comments/{comment}', [CommentController::class, 'destroy']
 
 Route::get('/bookmarks/', [BookmarkController::class, 'index'])->middleware('auth');
 Route::post('/bookmarks/{post}', [BookmarkController::class, 'store'])->middleware('auth')->name('bookmarks.store');
+Route::delete('/bookmarks/{post}', [BookmarkController::class, 'destroy'])->middleware('auth')->name('bookmarks.delete');
+
 
 Route::get('/admin/posts', [AdminController::class, 'indexPosts'])->middleware('admin');
 Route::get('/admin/posts/{post}/edit', [AdminController::class, 'editPost'])->middleware('admin');

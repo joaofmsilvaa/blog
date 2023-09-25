@@ -14,12 +14,11 @@ class BookmarkController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $bookmarks = $user->bookmark;
+        $bookmarks = $user->bookmark()->orderBy('created_at', 'asc')->get();;
 
         $posts = $bookmarks->map(function ($bookmark) {
             return $bookmark->post;
         });
-
 
         return view('bookmark.index', compact('posts'));
 
@@ -35,8 +34,18 @@ class BookmarkController extends Controller
         $data=array('post_id'=>$post_id,"category_id"=>$category_id, "user_id" => $user_id);
         DB::table('bookmarks')->insert($data);
 
-        return back()->with('success', 'Bookmark added created');
+        return back()->with('success', 'Bookmark Added');
 
     }
+
+    public function destroy(Post $post){
+        $bookmark = Bookmark::where('post_id', $post->id)->where('user_id', '=', auth()->user()?->id)->first();
+
+        $bookmark->delete();
+
+        return back()->with('success', 'Bookmark Removed');
+
+    }
+
 
 }
