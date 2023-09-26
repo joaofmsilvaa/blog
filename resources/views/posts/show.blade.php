@@ -150,7 +150,6 @@
                     </div>
 
                     <div class="space-y-4 lg:text-lg leading-loose text-justify">
-
                         {!! html_entity_decode($post->body) !!}
                     </div>
 
