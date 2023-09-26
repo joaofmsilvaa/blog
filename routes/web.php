@@ -40,6 +40,8 @@ Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth
 Route::post('/posts/publish', [PostController::class, 'store'])->middleware('auth');
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->middleware('posted', 'addView');
 Route::patch('/posts/{post}', [PostController::class, 'publish'])->name('posts.publish');
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+Route::patch('/posts/{post}/patch', [PostController::class, 'update'])->name('post.update');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 Route::post('/posts/{post:slug}/comments', [CommentController::class, 'store']);

@@ -53,15 +53,21 @@
                         @if($canDelete || $isPosted)
                             <div>
                                 @if ($canDelete)
-                                    <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                                class="bg-red-600 transition hover:bg-red-400 rounded text-white p-1 mt-3">
-                                            Delete
-                                            Post
-                                        </button>
-                                    </form>
+                                    <div class="flex-col">
+                                        <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                    class="bg-red-600 transition hover:bg-red-400 rounded text-white p-1 mt-3 px-2">
+                                                Delete
+                                                Post
+                                            </button>
+                                        </form>
+                                        <div class="mt-2">
+                                            <a href="/posts/{{$post->id}}/edit"
+                                               class="bg-blue-600 transition hover:bg-blue-400 rounded text-white p-1 mt-3 px-8">Edit</a>
+                                        </div>
+                                    </div>
                                 @endif
 
                                 @if($isPosted)
@@ -69,7 +75,7 @@
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit"
-                                                class="bg-green-600 transition hover:bg-green-400 rounded text-white p-1 mt-3">
+                                                class="bg-green-600 transition hover:bg-green-400 rounded text-white p-1 mt-3 px-5">
                                             Publish
                                         </button>
                                     </form>

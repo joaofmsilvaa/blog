@@ -29,6 +29,35 @@ class PostController extends Controller
         return view('posts.create');
     }
 
+    public function edit(Post $post){
+        return view('posts.edit', ['post' => $post]);
+    }
+
+    public function update(Post $post){
+
+        $attributes = request()->validate([
+            'title'=>'required',
+            'thumbnail' => ['image'],
+            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],
+            'excerpt'=>'required',
+            'body'=>'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+        ]);
+
+        if(isset($attributes['thumbnail'])){
+            $storingPath = request()->file('thumbnail')->store('public/thumbnails');
+            $attributes['thumbnail'] = str_replace("public/", "",$storingPath);
+
+        }
+
+        $post['status'] = 0;
+
+        $post->update($attributes);
+
+        return redirect('/')->with('success', 'Post Updated but now needs to be aproved by the admin');
+
+    }
+
     public function store()
     {
 
@@ -53,6 +82,14 @@ class PostController extends Controller
     public function show(Post $post)
     {
 
+        $bookmarkCheck = Bookmark::where('post_id', $post->id)->where('user_id', '=', auth()->user()?->id)->first();
+
+        if (isset($bookmarkCheck)) {
+            $isBookmarked = true;
+        } else {
+            $isBookmarked = false;
+        }
+
         if (request()->route('post')->status == 0 && auth()->user()?->username == 'joao') {
             $isPosted = true;
         } else {
@@ -63,14 +100,6 @@ class PostController extends Controller
             $canDelete = true;
         } else {
             $canDelete = false;
-        }
-
-        $bookmarkCheck = Bookmark::where('post_id', $post->id)->where('user_id', '=', auth()->user()?->id)->first();
-
-        if (isset($bookmarkCheck)) {
-            $isBookmarked = true;
-        } else {
-            $isBookmarked = false;
         }
 
 
