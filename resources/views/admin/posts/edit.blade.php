@@ -6,51 +6,89 @@
             @csrf
             @method('PATCH')
 
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-            <x-form.formInput name="title" value="{{$post->title}}"/>
+            <div class="flex justify-center">
+                <div class="mr-2">
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Author</label>
+                    <select name="user_id" id="user_id">
+                        @php
+                            $users = App\Models\User::all();
+                        @endphp
 
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug</label>
-            <x-form.formInput name="slug" value="{{$post->slug}}"/>
+                        @foreach($users as $user)
+                            <option value="{{$user->id}}"
+                                {{old('user_id', $post->author->id) == $user->id ? 'selected' : ''}}>
+                                {{$user->username}}</option>
+                        @endforeach
 
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thumbnail</label>
-            <div class="flex-col mt-6">
-                <div class="my-3">
-                    <img src="{{ asset('storage/' . $post->thumbnail) }}"
-                         id="image_preview"
-                         alt="Blog Post thumbnail"
-                         class="rounded-xl w-1/2 h-96 object-cover border-2 border-black-500"
-                         :value="old('thumbnail', $post->thumbnail)">
+                        @error('user')
+                        <p class="text-red-500 text-xs mt-2">{{$message}}</p>
+                        @enderror
+                    </select>
                 </div>
-                <div>
-                    <x-form.formInput name="thumbnail" type="file"/>
+
+                <div class="mr-2">
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                    <select name="category_id" id="category_id">
+                        @php
+                            $categories = App\Models\Category::all();
+                        @endphp
+
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}"
+                                {{old('category_id', $post->category_id) == $category->id ? 'selected' : ''}}>
+                                {{ucwords($category->name)}}</option>
+                        @endforeach
+
+                    </select>
+
+                    @error('category')
+                    <p class="text-red-500 text-xs mt-2">{{$message}}</p>
+                    @enderror
                 </div>
             </div>
 
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Excerpt</label>
-            <x-form.textarea name="excerpt">{{$post->excerpt}}</x-form.textarea>
+            <div class="mt-3">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                <x-form.formInput name="title" value="{{$post->title}}"/>
+            </div>
 
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
-            <x-form.textarea name="body">{{$post->body}}</x-form.textarea>
+            <div class="mt-3">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug</label>
+                <x-form.formInput name="slug" value="{{$post->slug}}"/>
+            </div>
 
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-            <div class="mb-6">
+            <div class="mt-3">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thumbnail</label>
+                <div class="flex-col mt-6">
+                    <div class="my-3">
+                        @if(isset($post->thumbnail))
+                            <img src="{{ asset('storage/' . $post->thumbnail) }}"
+                                 id="image_preview"
+                                 alt="Blog Post thumbnail"
+                                 class="rounded-xl w-1/2 h-96 object-cover border-2 border-black-500"
+                            >
+                        @else
+                            <img src="{{ asset('images/illustration1.png') }}"
+                                 id="image_preview"
+                                 alt="Blog Post thumbnail"
+                                 class="rounded-xl w-1/2 h-96 object-cover border-2 border-black-500"
+                                 :value="old('thumbnail', $post->thumbnail)">
+                        @endif
+                    </div>
+                    <div>
+                        <x-form.formInput name="thumbnail" type="file"/>
+                    </div>
+                </div>
+            </div>
 
-                <select name="category_id" id="category_id">
-                    @php
-                        $categories = App\Models\Category::all();
-                    @endphp
+            <div class="mt-3">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Excerpt</label>
+                <x-form.textarea name="excerpt">{{$post->excerpt}}</x-form.textarea>
+            </div>
 
-                    @foreach($categories as $category)
-                        <option value="{{$category->id}}"
-                            {{old('category_id', $post->category_id) == $category->id ? 'selected' : ''}}>
-                            {{ucwords($category->name)}}</option>
-                    @endforeach
-
-                </select>
-
-                @error('category')
-                <p class="text-red-500 text-xs mt-2">{{$message}}</p>
-                @enderror
+            <div class="mt-3">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
+                <x-form.textarea name="body">{{$post->body}}</x-form.textarea>
             </div>
 
 

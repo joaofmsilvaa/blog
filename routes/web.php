@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
@@ -24,12 +25,10 @@ Route::get('/', [PostController::class, 'index']);
 
 
 Route::get('register', [RegisterController::class, 'create']);
-Route::get('login', [SessionController::class, 'create']);
-
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
 
-Route::get('login', [SessionController::class, 'create'])->middleware('guest');
+Route::get('login', [SessionController::class, 'create'])->middleware('guest')->name('login');
 Route::post('sessions', [SessionController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth');
 
@@ -39,7 +38,7 @@ Route::patch('/profile/{user}/update', [UserController::class, 'update'])->middl
 
 Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth');
 Route::post('/posts/publish', [PostController::class, 'store'])->middleware('auth');
-Route::get('/posts/{post:slug}', [PostController::class, 'show'])->middleware('posted');
+Route::get('/posts/{post:slug}', [PostController::class, 'show'])->middleware('posted', 'addView');
 Route::patch('/posts/{post}', [PostController::class, 'publish'])->name('posts.publish');
 Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
 Route::patch('/posts/{post}/patch', [PostController::class, 'update'])->name('post.update');
@@ -47,6 +46,11 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.
 
 Route::post('/posts/{post:slug}/comments', [CommentController::class, 'store']);
 Route::delete('/posts/comments/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+Route::get('/bookmarks/', [BookmarkController::class, 'index'])->middleware('auth');
+Route::post('/bookmarks/{post}', [BookmarkController::class, 'store'])->middleware('auth')->name('bookmarks.store');
+Route::delete('/bookmarks/{post}', [BookmarkController::class, 'destroy'])->middleware('auth')->name('bookmarks.delete');
+
 
 Route::get('/admin/posts', [AdminController::class, 'indexPosts'])->middleware('admin');
 Route::get('/admin/posts/{post}/edit', [AdminController::class, 'editPost'])->middleware('admin');

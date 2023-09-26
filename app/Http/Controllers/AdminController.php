@@ -46,6 +46,7 @@ class AdminController extends Controller
 
         $attributes = request()->validate([
             'title'=>'required',
+            'user_id' => ['required', Rule::exists('users', 'id')],
             'thumbnail' => ['image'],
             'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],
             'excerpt'=>'required',

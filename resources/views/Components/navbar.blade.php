@@ -1,4 +1,4 @@
-<nav class="fixed right-0 left-0 top-0 w-full bg-white p-5 border-b-2">
+<nav class="fixed z-40 right-0 left-0 top-0 w-full bg-white p-5 border-b-2">
     <div class="px-8 w-full flex items-center flex justify-between items-center">
         <div>
             <a href="/">
@@ -19,12 +19,14 @@
                         </x-dropdown-item>
                     @endcan
 
+                    <x-dropdown-item href="/profile/{{auth()->user()->id}}">Profile
+                    </x-dropdown-item>
+
                     <x-dropdown-item href="/posts/create">New
                         post
                     </x-dropdown-item>
 
-                    <x-dropdown-item href="/profile/{{auth()->user()->id}}">Profile
-                    </x-dropdown-item>
+                    <x-dropdown-item href="/bookmarks/">Bookmarks</x-dropdown-item>
 
                     <x-dropdown-item href="#" x-data="{}"
                                      @click.prevent="document.querySelector('#logout-form').submit()">Log out
