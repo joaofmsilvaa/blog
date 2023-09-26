@@ -53,12 +53,19 @@
 <script>
     // Output elements in HTML style
     tinymce.init({
-        selector: 'textarea#body',  // change this value according to your html
+        selector: 'textarea#body',  // Selecione o ID correto de acordo com o seu HTML
+        plugins: 'lists',  // Adicione o plugin de lista
+        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',  // Adicione as opções de lista (bullist e numlist) à barra de ferramentas
+        style_formats: [
+            { title: 'un-numered list', selector: 'ul', classes: 'list-disc' },
+            { title: 'numered list', selector: 'ol', classes: 'list-decimal' }
+        ],
         formats: {
             alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,audio,video', classes: 'text-left' },
             aligncenter: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,audio,video', classes: 'text-center' },
             alignright: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,audio,video', classes: 'text-right' },
             alignjustify: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,audio,video', classes: 'text-full' },
+            bullist: {selector: 'ul', classes:'ul-disc'},
             bold: { inline: 'span', 'classes': 'font-bold' },
             italic: { inline: 'span', 'classes': 'font-italic' },
             underline: { inline: 'span', 'classes': 'underline', exact: true },
@@ -66,7 +73,7 @@
             forecolor: { inline: 'span', classes: 'forecolor', styles: { color: '%value' } },
             hilitecolor: { inline: 'span', classes: 'hilitecolor', styles: { backgroundColor: '%value' } },
             custom_format: { block: 'h1', attributes: { title: 'Header' }, styles: { color: 'red' } }
-        }
+        },
     });
 </script>
 
