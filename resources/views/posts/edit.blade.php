@@ -1,7 +1,8 @@
-@extends ('Components.layout')
+@extends('Components.layout')
 
 @props(['post'])
 
+@section('content')
 <div class="flex-1 p-8 m-8">
     <div class="mt-8 flex justify-center">
         <h1 class="text-3xl font-semibold">Editing post:<span class="ml-2">{{$post->title}}</span></h1>
@@ -42,14 +43,14 @@
                 </div>
 
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Excerpt</label>
-                <x-form.textarea name="excerpt">{{$post->excerpt}}</x-form.textarea>
+                <x-form.textarea name="excerpt" id="excerpt">{{$post->excerpt}}</x-form.textarea>
 
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
-                <x-form.textarea name="body">{{$post->body}}</x-form.textarea>
+                <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
+                <textarea name="body" id="body">{{$post->body}}</textarea>
+
 
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                 <div class="mb-6">
-
                     <select name="category_id" id="category_id">
                         @php
                             $categories = App\Models\Category::all();
@@ -57,17 +58,14 @@
 
                         @foreach($categories as $category)
                             <option value="{{$category->id}}"
-                                {{old('category_id', $post->category_id) == $category->id ? 'selected' : ''}}>
+                                    {{old('category_id', $post->category_id) == $category->id ? 'selected' : ''}}>
                                 {{ucwords($category->name)}}</option>
                         @endforeach
-
                     </select>
-
                     @error('category')
                     <p class="text-red-500 text-xs mt-2">{{$message}}</p>
                     @enderror
                 </div>
-
 
                 <div class="flex justify-end mt-2 border-t border-gray-300">
                     <button type="submit"
@@ -78,27 +76,6 @@
             </form>
         </x-pannel>
     </div>
+
 </div>
-
-<script>
-    const imageInput = document.getElementById('thumbnail');
-    const imagePreview = document.getElementById('image_preview');
-
-    imageInput.addEventListener('change', function (event) {
-        const file = event.target.files[0];
-
-        if (file) {
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block';
-            }
-
-            reader.readAsDataURL(file);
-        } else {
-            imagePreview.src = '#';
-            imagePreview.style.display = 'none';
-        }
-    });
-</script>
+@endsection

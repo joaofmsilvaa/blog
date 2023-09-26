@@ -40,7 +40,7 @@
 
                 <label for="Body"
                        class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
-                <x-form.textarea name="body"/>
+                <textarea name="body" id="body"></textarea>
 
                 <div class="mb-6 mt-2">
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
