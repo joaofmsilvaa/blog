@@ -2,7 +2,6 @@
 
 @props(['post', 'categories'])
 
-@section('content')
     <section class="px-6 py-2">
 
         <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
@@ -151,7 +150,8 @@
                     </div>
 
                     <div class="space-y-4 lg:text-lg leading-loose text-justify">
-                        <p>{!! $post->body !!}</p>
+
+                        {!! html_entity_decode($post->body) !!}
                     </div>
 
                 </div>
@@ -177,4 +177,3 @@
         </main>
 
     </section>
-@endsection

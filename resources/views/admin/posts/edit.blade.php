@@ -1,6 +1,7 @@
 @extends ('components.layout')
 
 @section('content')
+
     <x-settings heading="Edit Post: {{ $post->title}}">
         <form method="POST" action="/admin/posts/{{$post->id}}" enctype="multipart/form-data" >
             @csrf
@@ -88,7 +89,7 @@
 
             <div class="mt-3">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
-                <x-form.textarea name="body">{{$post->body}}</x-form.textarea>
+                <textarea name="body" id="body">{{$post->body}}</textarea>
             </div>
 
 
